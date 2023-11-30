@@ -20,6 +20,13 @@ emojilang is a toy language comprised only of emojis.
 pip3 install ply
 ```
 
+## To run
+
+```
+alias emoji='python3 main.py'
+emoji
+```
+
 ## License
 
 [MIT licensed](LICENSE)

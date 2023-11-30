@@ -1,0 +1,101 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statements
+Rule 1     statements -> statements statement
+Rule 2     statements -> statement
+Rule 3     statement -> PRINT L_PAREN expression R_PAREN
+Rule 4     expression -> NUMBER
+
+Terminals, with rules where they appear
+
+L_PAREN              : 3
+NUMBER               : 4
+PRINT                : 3
+R_PAREN              : 3
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 3
+statement            : 1 2
+statements           : 1 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statements
+    (1) statements -> . statements statement
+    (2) statements -> . statement
+    (3) statement -> . PRINT L_PAREN expression R_PAREN
+
+    PRINT           shift and go to state 3
+
+    statements                     shift and go to state 1
+    statement                      shift and go to state 2
+
+state 1
+
+    (0) S' -> statements .
+    (1) statements -> statements . statement
+    (3) statement -> . PRINT L_PAREN expression R_PAREN
+
+    PRINT           shift and go to state 3
+
+    statement                      shift and go to state 4
+
+state 2
+
+    (2) statements -> statement .
+
+    PRINT           reduce using rule 2 (statements -> statement .)
+    $end            reduce using rule 2 (statements -> statement .)
+
+
+state 3
+
+    (3) statement -> PRINT . L_PAREN expression R_PAREN
+
+    L_PAREN         shift and go to state 5
+
+
+state 4
+
+    (1) statements -> statements statement .
+
+    PRINT           reduce using rule 1 (statements -> statements statement .)
+    $end            reduce using rule 1 (statements -> statements statement .)
+
+
+state 5
+
+    (3) statement -> PRINT L_PAREN . expression R_PAREN
+    (4) expression -> . NUMBER
+
+    NUMBER          shift and go to state 7
+
+    expression                     shift and go to state 6
+
+state 6
+
+    (3) statement -> PRINT L_PAREN expression . R_PAREN
+
+    R_PAREN         shift and go to state 8
+
+
+state 7
+
+    (4) expression -> NUMBER .
+
+    R_PAREN         reduce using rule 4 (expression -> NUMBER .)
+
+
+state 8
+
+    (3) statement -> PRINT L_PAREN expression R_PAREN .
+
+    PRINT           reduce using rule 3 (statement -> PRINT L_PAREN expression R_PAREN .)
+    $end            reduce using rule 3 (statement -> PRINT L_PAREN expression R_PAREN .)
+
