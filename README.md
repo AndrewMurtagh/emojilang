@@ -8,7 +8,7 @@ emojilang is a toy language comprised only of emojis.
 - [ ] while loop
 - [ ] if statement
 - [ ] ifelse statement
-- [ ] comment
+- [x] comments
 - [ ] boolean expression
 - [ ] boolean literals
 - [x] variables and assignment
@@ -19,6 +19,7 @@ emojilang is a toy language comprised only of emojis.
 ```
 📌 - assignment
 📢 - print
+🤫 - comment
 🌜 - (
 🌛 - )
 0️⃣ - 0
@@ -37,9 +38,7 @@ emojilang is a toy language comprised only of emojis.
 
 ## Examples
 
-### Printing
-
-Print a numeric literal:
+**Print a numeric literal**
 
 ```
 📢🌜1️⃣🌛
@@ -47,7 +46,7 @@ Print a numeric literal:
 > 1
 ```
 
-### Variable assignment
+**Variable assignment**
 
 Assign a numeric literal to a variable and print its value:
 
@@ -57,6 +56,17 @@ Assign a numeric literal to a variable and print its value:
 
 > 3
 ```
+
+**Commenting**
+
+Add single line comments to.
+
+```
+🤫 the next line assigns 3️⃣ to 🦁
+🦁📌3️⃣
+```
+
+
 
 
 ## Dependencies

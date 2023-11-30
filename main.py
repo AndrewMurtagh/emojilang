@@ -1,10 +1,11 @@
 from ply import lex, yacc
 import emoji
 
-# need to define all tokens as functions, not strings
+# Note: need to define all tokens as functions, not strings
 
 tokens = [
     'NUMBER',
+    'COMMENT',
     'L_PAREN',
     'R_PAREN',
     'ASSIGNMENT',
@@ -17,6 +18,10 @@ keywords = {
 
 tokens = tokens + list(keywords.values())
 
+
+def t_COMMENT(t):
+    r'\:shushing_face:.*'
+    pass 
 
 def t_L_PAREN(t):
     r':last_quarter_moon_face:'
@@ -62,11 +67,14 @@ lexer = lex.lex()
 
 source_code = '''
 🦁📌1️⃣
+🤫 this is a comment
 📢🌜🦁🌛
 📢🌜1️⃣🌛
+🤫 this is a comment
 '''
 
 
+# print(emoji.demojize(source_code))
 lexer.input(emoji.demojize(source_code))
 
 print('---LEXING---\n\n')
