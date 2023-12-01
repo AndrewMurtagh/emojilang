@@ -54,8 +54,7 @@ emojilang is a toy language comprised only of emojis.
 💤 - sleep
 ```
 
-
-## Examples
+## Features
 
 **Print a numeric literal**
 
