@@ -2,37 +2,30 @@
 
 emojilang is a toy language comprised only of emojis.
 
-## Features
-- [ ] boolean operators
-- [ ] mathematical operators
-- [ ] while loop
-- [x] if statement
-- [x] comments
-- [x] boolean comparisons
-- [x] boolean literals
-- [x] variables and assignment
-- [x] print
-- [ ] ifelse statement
-
 ## Syntax
 
 ```
-📌 - assignment
-📢 - print
-🤫 - comment
+# control structures
 🤔 - if
-😁 - true
-😢 - false
+🔥 - while
+
+# boolean operators
 🌘 - <
 🌒 - >
 🌖 - <=
 🌔 - >=
 🌕 - ==
 🌑 - !=
+
+# delimiters
 🌜 - (
 🌛 - )
 🛫 - {
 🛬 - }
+
+# literals
+😁 - true
+😢 - false
 0️⃣ - 0
 1️⃣ - 1
 2️⃣ - 2
@@ -43,7 +36,15 @@ emojilang is a toy language comprised only of emojis.
 7️⃣ - 7
 8️⃣ - 8
 9️⃣ - 9
+
+# variables and assignment
+📌 - assignment
 🦁,🐹,🛵,📺,🥨, etc. - variable names
+
+# utilities
+📢 - print
+🤫 - comment
+💤 - sleep
 ```
 
 
@@ -55,6 +56,12 @@ emojilang is a toy language comprised only of emojis.
 📢🌜1️⃣🌛
 
 > 1
+```
+
+**Sleep for seconds**
+
+```
+💤🌜1️⃣🌛
 ```
 
 **Variable assignment**
@@ -122,7 +129,28 @@ emojilang is a toy language comprised only of emojis.
     📢🌜1️⃣🌛
 🛬
 ```
+**While loop**
 
+```
+🔥🌜😁🌛 🛫
+    🤫 this should always be executed
+    📢🌜1️⃣🌛
+    💤🌜3️⃣🌛
+🛬
+```
+
+
+## Features
+- [ ] mathematical operators
+- [x] while loop
+- [x] sleep
+- [x] if statement
+- [x] comments
+- [x] boolean operators
+- [x] boolean literals
+- [x] variables and assignment
+- [x] print
+- [ ] ifelse statement
 
 
 ## Dependencies

@@ -1,6 +1,7 @@
 from ply import lex, yacc
 import emoji
 import sys
+import time
 
 # Note: need to define all tokens as functions, not strings
 tokens = [
@@ -34,7 +35,9 @@ tokens = [
 
 keywords = {
     'print' : 'PRINT',
-    'if': 'IF'
+    'if': 'IF',
+    'while': 'WHILE',
+    'sleep': 'SLEEP'
 }
 
 tokens = tokens + list(keywords.values())
@@ -114,8 +117,16 @@ def t_IF(t):
     r':thinking_face:'
     return t
 
+def t_WHILE(t):
+    r':fire:'
+    return t
+
 def t_PRINT(t):
     r':loudspeaker:'
+    return t
+
+def t_SLEEP(t):
+    r':ZZZ:'
     return t
 
 def t_VARIABLE(t):
@@ -152,16 +163,63 @@ def p_statement_print(p):
         return
     print('> ', p[3])
 
+def p_statement_sleep(p):
+    '''statement : SLEEP L_PAREN NUMBER R_PAREN'''
+    if not stack[-1]:
+        return
+    time.sleep(p[3])
+
 def p_statement_assign(p):
     'statement : VARIABLE ASSIGNMENT expression'
     variables[p[1]] = p[3]
 
 def p_statement_if(p):
-    '''statement : IF L_PAREN expression_boolean R_PAREN L_BRACKET append_stack statements pop_stack R_BRACKET '''
+    '''statement : IF L_PAREN expression_boolean R_PAREN L_BRACKET if_start statements if_end R_BRACKET'''
     if p[3]:
         p[0] = p[6]
     else:
         p[0] = None
+
+def p_if_start(p):
+    '''
+    if_start :
+    '''
+    if not stack[-1]:
+        stack.append(False)
+    else:
+        stack.append(p[-3])
+        
+def p_if_end(p):
+    '''
+    if_end :
+    '''
+    stack.pop()
+
+
+def p_statement_while(p):
+    '''statement : WHILE L_PAREN expression_boolean R_PAREN L_BRACKET while_start statements while_end R_BRACKET'''
+    pass
+
+
+def p_while_start(p):
+    """
+    while_start :
+    """
+    if not stack[-1]:
+        stack.append(False)
+    else:
+        stack.append(p[-3])
+
+
+def p_while_end(p):
+    """
+    while_end :
+    """
+    stack.pop()
+    if stack[-1] and p[-5]:
+        print('HI')
+        p.lexer.lexpos = parser.symstack[-7].lexpos
+
 
 def p_expression_boolean(p):
     '''expression_boolean : expression_boolean_comparison
@@ -216,43 +274,25 @@ def p_expression_number(p):
     'expression : NUMBER'
     p[0] = p[1]
 
-def p_append_stack(p):
-    '''
-    append_stack :
-    '''
-    if not stack[-1]:
-        stack.append(False)
-    else:
-        stack.append(p[-3])
-        
-def p_pop_stack(p):
-    '''
-    pop_stack :
-    '''
-    stack.pop()
-
 
 def p_error(p):
     print(f'Error > Syntax error in source code: {str(p)}')
 
+source_code = '''🔥🌜😁🌛 🛫
+    🤫 this should always be executed
+    📢🌜1️⃣🌛
+    💤🌜3️⃣🌛
+🛬
+'''
 
+print(emoji.demojize('💤'))
+lexer.input(emoji.demojize(source_code))
 
-if __name__ == '__main__':
-    arguments = len(sys.argv)
-    if len(sys.argv) == 2:
-        with open(sys.argv[1]) as f:
-            source_code = f.read()
-            # print(emoji.demojize())
-            lexer.input(emoji.demojize(source_code))
+while True:
+    tok = lexer.token()
+    if not tok:
+        break
+    print(tok)
 
-            while True:
-                tok = lexer.token()
-                if not tok:
-                    break
-                print(tok)
-
-            yacc.yacc(write_tables=False, debug=True)
-            res = yacc.parse(emoji.demojize(source_code))
-    
-    else:
-        pass
+parser = yacc.yacc(write_tables=False, debug=True)
+res = yacc.parse(emoji.demojize(source_code))
