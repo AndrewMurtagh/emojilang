@@ -17,6 +17,13 @@ emojilang is a toy language comprised only of emojis.
 🌕 - ==
 🌑 - !=
 
+# numerical operators
+💥 - *
+✨ - +
+💫 - -
+🗯️ - /
+💭 - %
+
 # delimiters
 🌜 - (
 🌛 - )
@@ -50,7 +57,7 @@ emojilang is a toy language comprised only of emojis.
 
 ## Examples
 
-**Printing a numeric literal**
+**Print a numeric literal**
 
 ```
 📢🌜1️⃣🌛
@@ -76,37 +83,65 @@ emojilang is a toy language comprised only of emojis.
 **Commenting**
 
 ```
-🤫 the next line assigns 3️⃣ to 🦁
+🤫 the next line assigns 3️⃣ to 🦁, this line won't execute
 🦁📌3️⃣
 ```
 
 **If, and nested if, statements**
 
 ```
-🤔🌜1️⃣🌤️1️⃣🌛 🛫 
+🤔🌜1️⃣🌕1️⃣🌛 🛫 
 
     🤫 this should be executed
     📢🌜2️⃣🌛
 
-    🤔🌜1️⃣🌤️9️⃣🌛 🛫 
+    🤔🌜1️⃣🌕9️⃣🌛 🛫 
 
         🤫 this should not be executed
         📢🌜3️⃣🌛
     🛬
 
 🛬
+
+> 2
 ```
+**Numeric operators**
+
+```
+📢🌜8️⃣💥2️⃣🌛
+📢🌜8️⃣✨2️⃣🌛
+📢🌜8️⃣💫2️⃣🌛
+📢🌜8️⃣🗯️2️⃣🌛
+📢🌜8️⃣💭2️⃣🌛
+
+>  16
+>  10
+>  6
+>  4.0
+>  0
+```
+
+```
+📢🌜4️⃣💥🌜3️⃣✨5️⃣🌛🌛
+
+> 32
+```
+
 
 **Boolean literals**
 
 ```
 🤔🌜😁🌛 🛫 
-    🤫 this should be executed
+    🤫 this should be executed because 😁 is true
     📢🌜1️⃣🌛
 🛬
 
+> 1
+```
+
+```
 🤔🌜😢🌛 🛫 
-    🤫 this should not be executed
+    🤫 this should not be executed because 😢 is not true
     📢🌜1️⃣🌛
 🛬
 ```
@@ -119,15 +154,23 @@ emojilang is a toy language comprised only of emojis.
     📢🌜1️⃣🌛
 🛬
 
+> 1
+```
+
+```
 🤔🌜1️⃣🌑1️⃣🌛 🛫 
     🤫 this should not be executed because 1 is equal to 1
     📢🌜1️⃣🌛
 🛬
+```
 
+```
 🤔🌜1️⃣🌒0️⃣🌛 🛫 
     🤫 this should be executed because 1 is greater than 0
     📢🌜1️⃣🌛
 🛬
+
+> 1
 ```
 **While loop**
 
@@ -137,11 +180,15 @@ emojilang is a toy language comprised only of emojis.
     📢🌜1️⃣🌛
     💤🌜3️⃣🌛
 🛬
+
+> 1
+> 1
+...
 ```
 
 
 ## Features
-- [ ] mathematical operators
+- [x] mathematical operators
 - [x] while loop
 - [x] sleep
 - [x] if statement
@@ -150,7 +197,6 @@ emojilang is a toy language comprised only of emojis.
 - [x] boolean literals
 - [x] variables and assignment
 - [x] print
-- [ ] ifelse statement
 
 
 ## Dependencies
@@ -168,3 +214,6 @@ emoji
 ## License
 
 [MIT licensed](LICENSE)
+
+
+<!-- fizzbuzz, fibonacci -->

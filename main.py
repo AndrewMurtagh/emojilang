@@ -11,6 +11,13 @@ tokens = [
     'ASSIGNMENT',
     'VARIABLE',
 
+    # numerical operators
+    'TIMES',
+    'PLUS',
+    'DIVIDE',
+    'MINUS',
+    'MODULO',
+
     # boolean operators
     'EQUALS',
     'NOT_EQUALS',
@@ -42,6 +49,30 @@ keywords = {
 
 tokens = tokens + list(keywords.values())
 
+
+# numerical operators
+def t_TIMES(t):
+    r':collision:'
+    return t
+
+def t_PLUS(t):
+    r':sparkles:'
+    return t
+
+
+def t_DIVIDE(t):
+    r':right_anger_bubble:'
+    return t
+
+
+def t_MINUS(t):
+    r':dizzy:'
+    return t
+
+
+def t_MODULO(t):
+    r':thought_balloon:'
+    return t
 
 
 # boolean operators
@@ -151,6 +182,10 @@ lexer = lex.lex()
 
 stack = [True]
 variables = {}
+precedence = (
+    ('left','PLUS','MINUS'),
+    ('left','TIMES','DIVIDE'),
+)
 
 def p_statements(p):
     '''statements : statements statement
@@ -221,6 +256,31 @@ def p_while_end(p):
         p.lexer.lexpos = parser.symstack[-7].lexpos
 
 
+def p_expression_maths(p):
+    '''expression : expression PLUS expression
+                  | expression MINUS expression
+                  | expression TIMES expression
+                  | expression DIVIDE expression
+                  | expression MODULO expression'''
+    if p[2] == t_PLUS.__doc__: 
+        p[0] = p[1] + p[3]
+
+    elif p[2] == t_MINUS.__doc__: 
+        p[0] = p[1] - p[3]
+
+    elif p[2] == t_TIMES.__doc__: 
+        p[0] = p[1] * p[3]
+
+    elif p[2] == t_DIVIDE.__doc__: 
+        p[0] = p[1] / p[3]
+
+    elif p[2] == t_MODULO.__doc__: 
+        p[0] = p[1] % p[3]
+
+def p_expression_paren(p):
+    'expression : L_PAREN expression R_PAREN'
+    p[0] = p[2]
+
 def p_expression_boolean(p):
     '''expression_boolean : expression_boolean_comparison
         | expression_true
@@ -278,14 +338,15 @@ def p_expression_number(p):
 def p_error(p):
     print(f'Error > Syntax error in source code: {str(p)}')
 
-source_code = '''🔥🌜😁🌛 🛫
-    🤫 this should always be executed
+
+source_code = '''🐸📌4️⃣💥🌜3️⃣✨5️⃣🌛
+🤔🌜🐸🌕3️⃣2️⃣🌛 🛫
+    🤫 this should be executed
     📢🌜1️⃣🌛
-    💤🌜3️⃣🌛
 🛬
 '''
 
-print(emoji.demojize('💤'))
+# print(emoji.demojize(''))
 lexer.input(emoji.demojize(source_code))
 
 while True:
