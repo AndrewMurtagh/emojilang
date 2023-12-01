@@ -7,12 +7,12 @@ emojilang is a toy language comprised only of emojis.
 - [ ] mathematical operators
 - [ ] while loop
 - [x] if statement
-- [ ] ifelse statement
 - [x] comments
-- [ ] boolean expression
-- [ ] boolean literals
+- [x] boolean comparisons
+- [x] boolean literals
 - [x] variables and assignment
 - [x] print
+- [ ] ifelse statement
 
 ## Syntax
 
@@ -21,7 +21,14 @@ emojilang is a toy language comprised only of emojis.
 📢 - print
 🤫 - comment
 🤔 - if
-🌤️ - ==
+😁 - true
+😢 - false
+🌘 - <
+🌒 - >
+🌖 - <=
+🌔 - >=
+🌕 - ==
+🌑 - !=
 🌜 - (
 🌛 - )
 🛫 - {
@@ -33,7 +40,7 @@ emojilang is a toy language comprised only of emojis.
 4️⃣ - 4
 5️⃣ - 5
 6️⃣ - 6
-7️⃣ - 8
+7️⃣ - 7
 8️⃣ - 8
 9️⃣ - 9
 🦁,🐹,🛵,📺,🥨, etc. - variable names
@@ -42,7 +49,7 @@ emojilang is a toy language comprised only of emojis.
 
 ## Examples
 
-**Print a numeric literal**
+**Printing a numeric literal**
 
 ```
 📢🌜1️⃣🌛
@@ -51,8 +58,6 @@ emojilang is a toy language comprised only of emojis.
 ```
 
 **Variable assignment**
-
-Assign a numeric literal to a variable and print its value:
 
 ```
 🦁📌3️⃣
@@ -63,16 +68,12 @@ Assign a numeric literal to a variable and print its value:
 
 **Commenting**
 
-Add single line comments.
-
 ```
 🤫 the next line assigns 3️⃣ to 🦁
 🦁📌3️⃣
 ```
 
-**If statement**
-
-Nested if statements can be evaluated.
+**If, and nested if, statements**
 
 ```
 🤔🌜1️⃣🌤️1️⃣🌛 🛫 
@@ -89,6 +90,38 @@ Nested if statements can be evaluated.
 🛬
 ```
 
+**Boolean literals**
+
+```
+🤔🌜😁🌛 🛫 
+    🤫 this should be executed
+    📢🌜1️⃣🌛
+🛬
+
+🤔🌜😢🌛 🛫 
+    🤫 this should not be executed
+    📢🌜1️⃣🌛
+🛬
+```
+
+**Boolean comparisons**
+
+```
+🤔🌜1️⃣🌕1️⃣🌛 🛫 
+    🤫 this should be executed because 1 is equal to 1
+    📢🌜1️⃣🌛
+🛬
+
+🤔🌜1️⃣🌑1️⃣🌛 🛫 
+    🤫 this should not be executed because 1 is equal to 1
+    📢🌜1️⃣🌛
+🛬
+
+🤔🌜1️⃣🌒0️⃣🌛 🛫 
+    🤫 this should be executed because 1 is greater than 0
+    📢🌜1️⃣🌛
+🛬
+```
 
 
 
